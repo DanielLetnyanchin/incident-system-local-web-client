@@ -1,0 +1,42 @@
+<div class="panel panel-primary">
+    <div class="panel-heading">
+      Add a incident
+    </div>
+
+    <div class="panel-body">
+      <form class="form-horizontal" novalidate (ngSubmit)="addIncident()" [formGroup]="incidentForm">
+        <fieldset>
+          <div class="form-group">
+            <label class="col-md-2 control-label" for="statusId">Status</label>
+            <div class="col-md-8">
+              <input class="form-control" id="statusId" type="text" placeholder="Status" formControlName="status" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-md-2 control-label" for="descriptionId">Description</label>
+            <div class="col-md-8">
+              <textarea class="form-control" id="descriptionId" placeholder="Description" rows=5 formControlName="description"></textarea>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-md-4 col-md-offset-2">
+              <span>
+                <button class="btn btn-primary" type="submit">
+                  Save
+                </button>
+              </span>
+              <span>
+                <a class="btn btn-default" [routerLink]="['/incidents']">
+                  Back
+                </a>
+              </span>
+            </div>
+          </div>
+
+        </fieldset>
+      </form>
+    </div>
+
+  </div>

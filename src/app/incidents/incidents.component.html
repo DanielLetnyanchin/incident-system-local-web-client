@@ -1,0 +1,41 @@
+<div class='panel panel-primary'>
+  <div class='panel-heading'>
+    Your incidents
+  </div>
+
+  <a class="btn btn-primary" style="width:150px; margin-left:10px; margin-top:10px;"  [routerLink]="['/incident-add']">
+    Add a incident
+  </a>
+
+  <div class='panel-body'>
+    <div class='table-responsive'>
+      <table class='table' *ngIf='incidents && incidents.length'>
+        <thead>
+          <tr>
+            <th>Status</th>
+            <th>Description</th>
+            <th>Date created</th>
+            <th>Date modified</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor='let incident of incidents'>
+            <td>{{incident.status}}</td>
+            <td>
+              <a [routerLink]="['/incidents', incident.incidentId]">
+                {{incident.description}}
+              </a>
+            </td>
+            <td>{{incident.dateCreated|date:'dd/MM/yyyy'}}</td>
+            <td>{{incident.dateModified|date:'dd/MM/yyyy'}}</td>
+            <td>
+              <a class="btn btn-primary" [routerLink]="['/incident-update', incident.incidentId]">
+                Edit
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
