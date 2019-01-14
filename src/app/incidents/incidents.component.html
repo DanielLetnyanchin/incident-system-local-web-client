@@ -4,7 +4,7 @@
   </div>
 
   <a class="btn btn-primary" style="width:150px; margin-left:10px; margin-top:10px;"  [routerLink]="['/incident-add']">
-    Add a incident
+    Add an incident
   </a>
 
   <div class='panel-body'>
@@ -12,6 +12,7 @@
       <table class='table' *ngIf='incidents && incidents.length'>
         <thead>
           <tr>
+            <th>Title</th>
             <th>Status</th>
             <th>Description</th>
             <th>Date created</th>
@@ -23,7 +24,7 @@
             <td>{{incident.status}}</td>
             <td>
               <a [routerLink]="['/incidents', incident.incidentId]">
-                {{incident.description}}
+                {{incident.title}}
               </a>
             </td>
             <td>{{incident.dateCreated|date:'dd/MM/yyyy'}}</td>

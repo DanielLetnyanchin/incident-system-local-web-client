@@ -4,6 +4,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { AboutComponent } from './about';
 import { AppComponent } from './app.component';
 import { IncidentsComponent, IncidentDetailComponent, IncidentUpdateComponent, IncidentAddComponent } from './incidents';
+import { CommentAddComponent } from './incidents/comments/index';
+import { CommentsComponent } from './incidents/comments/index';
 
 const routes: Routes = [
   // redirect root to the dasbhoard route
@@ -12,7 +14,9 @@ const routes: Routes = [
   { path: 'about', component: AboutComponent },
   { path: 'incidents/:incidentId', component: IncidentDetailComponent },
   { path: 'incident-update/:incidentId', component: IncidentUpdateComponent },
-  { path: 'incident-add', component: IncidentAddComponent }
+  { path: 'incident-add', component: IncidentAddComponent },
+  { path: 'incidents/:incidentId/comment-add', component: CommentAddComponent },
+  { path: 'incidents/:incidentId/comments', component: CommentsComponent }
     //  { path: '**', redirectTo: 'incidents' },
 ];
 

@@ -12,11 +12,13 @@ import {
   IncidentsComponent, IncidentAddComponent, IncidentDetailComponent,
   IncidentUpdateComponent
  } from './incidents';
+ import { CommentsComponent, CommentAddComponent } from './incidents/comments';
+ import { IncidentService } from './incidents/shared/incident.service';
+ import { CommentService } from './incidents/comments/shared/comment.service';
 import { GlobalErrorHandler } from './shared/global-error-handler';
 import { ErrorLoggerService } from './shared/error-logger.service';
 import { HandleHttpErrorInterceptor } from './shared/handle-http-error-interceptor';
 import { WriteOutJsonInterceptor } from './shared/write-out-json-interceptor';
-import { IncidentService } from './incidents/shared/incident.service';
 
 @NgModule({
   declarations: [
@@ -26,6 +28,8 @@ import { IncidentService } from './incidents/shared/incident.service';
     IncidentDetailComponent,
     IncidentAddComponent,
     IncidentUpdateComponent,
+    CommentsComponent,
+    CommentAddComponent,
   ],
   imports: [
     BrowserModule,
@@ -45,7 +49,7 @@ import { IncidentService } from './incidents/shared/incident.service';
       useClass: HandleHttpErrorInterceptor,
       multi: true,
     },
-    GlobalErrorHandler, ErrorLoggerService, IncidentService, DatePipe],
+    GlobalErrorHandler, ErrorLoggerService, IncidentService, DatePipe, CommentService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

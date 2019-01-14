@@ -16,7 +16,7 @@ export class IncidentUpdateComponent implements OnInit, OnDestroy {
 
   public incidentForm: FormGroup;
   private incident: Incident;
-  private incidentId: string;
+  private incidentId: number;
   private sub: Subscription;
 
   constructor(private incidentService: IncidentService,
@@ -27,7 +27,7 @@ export class IncidentUpdateComponent implements OnInit, OnDestroy {
   ngOnInit() {
     // define the incidentForm (with empty default values)
     this.incidentForm = this.formBuilder.group({
-      status: [''],
+      title: [''],
       description: ['']
     });
 
@@ -52,7 +52,7 @@ export class IncidentUpdateComponent implements OnInit, OnDestroy {
 
   private updateIncidentForm(): void {
     this.incidentForm.patchValue({
-      status: this.incident.status,
+      title: this.incident.title,
       description: this.incident.description
     });
   }

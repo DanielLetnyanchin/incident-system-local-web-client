@@ -1,0 +1,18 @@
+<div class="row" style="margin: 0px;">
+    <table class='table' *ngIf='comments && comments.length'>
+            <thead>
+              <tr>
+                <th>Author</th>
+                <th>Message</th>
+                <th>Date Created</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor='let comment of comments'>
+                <td>{{comment.author}}</td>
+                <td>{{comment.Message}}</td>
+                <td>{{comment.dateCreated|date:'dd/MM/yyyy'}}</td>
+              </tr>
+            </tbody>
+          </table>
+</div>
