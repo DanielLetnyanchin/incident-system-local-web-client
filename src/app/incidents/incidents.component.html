@@ -17,18 +17,21 @@
             <th>Description</th>
             <th>Date created</th>
             <th>Date modified</th>
+            <th>Priority</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor='let incident of incidents'>
+            <td>{{incident.title}}</td>
             <td>{{incident.status}}</td>
             <td>
               <a [routerLink]="['/incidents', incident.incidentId]">
-                {{incident.title}}
+                {{incident.description}}
               </a>
             </td>
             <td>{{incident.dateCreated|date:'dd/MM/yyyy'}}</td>
             <td>{{incident.dateModified|date:'dd/MM/yyyy'}}</td>
+            <td>{{incident.priority}}</td>
             <td>
               <a class="btn btn-primary" [routerLink]="['/incident-update', incident.incidentId]">
                 Edit
