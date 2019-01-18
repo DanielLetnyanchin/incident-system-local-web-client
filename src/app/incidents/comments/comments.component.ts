@@ -14,7 +14,7 @@ import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
 export class CommentsComponent implements OnInit, OnDestroy {
 
   private sub: Subscription;
-  private incidentId: number;
+  private incidentId: string;
   comments: Comment[];
 
   constructor(private commentService: CommentService,

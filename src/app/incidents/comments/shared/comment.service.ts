@@ -11,7 +11,7 @@ export class CommentService extends BaseService {
     super();
   }
 
-  getComments(incidentId: number): Observable<Comment[]> {
+  getComments(incidentId: string): Observable<Comment[]> {
     return this.http.get<Comment[]>(`${this.apiUrl}/incidents/${incidentId}/comments`);
   }
 }

@@ -16,7 +16,7 @@ export class IncidentService extends BaseService {
         return this.http.get<Incident[]>(`${this.apiUrl}/incidents`);
     }
 
-    getIncident(incidentId: number): Observable<Incident> {
+    getIncident(incidentId: string): Observable<Incident> {
         return this.http.get<Incident>(`${this.apiUrl}/incidents/${incidentId}`);
     }
 }

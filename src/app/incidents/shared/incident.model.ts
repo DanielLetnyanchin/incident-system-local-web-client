@@ -1,5 +1,5 @@
 export class Incident {
-    incidentId: number;
+    incidentId: string;
     title: string;
     description: string;
     status: string;

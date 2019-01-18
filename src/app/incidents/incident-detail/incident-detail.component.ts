@@ -13,7 +13,7 @@ import { Subscription } from 'rxjs/';
 export class IncidentDetailComponent implements OnInit, OnDestroy {
 
   private incident: any;
-  private incidentId: number;
+  private incidentId: string;
   private sub: Subscription;
 
   constructor(private incidentService: IncidentService,

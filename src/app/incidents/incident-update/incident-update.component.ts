@@ -16,7 +16,7 @@ export class IncidentUpdateComponent implements OnInit, OnDestroy {
 
   public incidentForm: FormGroup;
   private incident: Incident;
-  private incidentId: number;
+  private incidentId: string;
   private sub: Subscription;
 
   constructor(private incidentService: IncidentService,

@@ -1,5 +1,5 @@
 export class Comment  {
-  commentId: number;
+  commentId: string;
   author: string;
   message: string;
   dateCreated: Date;
