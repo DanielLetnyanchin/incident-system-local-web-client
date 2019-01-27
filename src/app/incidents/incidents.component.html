@@ -17,7 +17,6 @@
             <th>Description</th>
             <th>Date created</th>
             <th>Date modified</th>
-            <th>Priority</th>
           </tr>
         </thead>
         <tbody>
@@ -31,7 +30,6 @@
             </td>
             <td>{{incident.dateCreated|date:'dd/MM/yyyy'}}</td>
             <td>{{incident.dateModified|date:'dd/MM/yyyy'}}</td>
-            <td>{{incident.priority}}</td>
             <td>
               <a class="btn btn-primary" [routerLink]="['/incident-update', incident.incidentId]">
                 Edit

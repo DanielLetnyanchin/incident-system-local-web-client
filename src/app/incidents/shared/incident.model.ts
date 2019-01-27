@@ -1,9 +1,9 @@
-export class Incident {
+import { IncidentAbstractBase } from './incident-abstract-base.model';
+
+export class Incident extends IncidentAbstractBase {
     incidentId: string;
-    title: string;
-    description: string;
     status: string;
-    priority: string;
+    createdBy: string;
     dateModified: Date;
     dateCreated: Date;
 }

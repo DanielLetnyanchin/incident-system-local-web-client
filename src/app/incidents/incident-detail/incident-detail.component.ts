@@ -15,6 +15,8 @@ export class IncidentDetailComponent implements OnInit, OnDestroy {
   private incident: any;
   private incidentId: string;
   private sub: Subscription;
+  // tslint:disable-next-line:no-inferrable-types
+  private isAdmin: boolean = false;
 
   constructor(private incidentService: IncidentService,
     private route: ActivatedRoute) {
@@ -26,10 +28,19 @@ export class IncidentDetailComponent implements OnInit, OnDestroy {
       params => {
         this.incidentId = params['incidentId'];
 
+        if (this.isAdmin === true) {
+        // get incident with priority and assignedto fields
+        this.incidentService.getIncidentWithPriorityAndAssignedTo(this.incidentId)
+        .subscribe(incident => {
+          this.incident = incident;
+        });
+      } else {
+        // get incident
         this.incidentService.getIncident(this.incidentId)
         .subscribe(incident => {
           this.incident = incident;
         });
+      }
       }
     );
   }

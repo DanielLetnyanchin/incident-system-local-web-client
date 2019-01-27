@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-
+import 'automapper-ts';
 @Component({
   selector: 'incident-system-root',
   templateUrl: './app.component.html',

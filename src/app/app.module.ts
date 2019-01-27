@@ -13,13 +13,14 @@ import {
   IncidentUpdateComponent
  } from './incidents';
  import { CommentsComponent, CommentAddComponent } from './incidents/comments';
+import { MasterDataService } from './shared/master-data.service';
  import { IncidentService } from './incidents/shared/incident.service';
  import { CommentService } from './incidents/comments/shared/comment.service';
 import { GlobalErrorHandler } from './shared/global-error-handler';
 import { ErrorLoggerService } from './shared/error-logger.service';
 import { HandleHttpErrorInterceptor } from './shared/handle-http-error-interceptor';
 import { WriteOutJsonInterceptor } from './shared/write-out-json-interceptor';
-
+import { IncidentForCreation } from './incidents/shared/incident-for-creation.model';
 @NgModule({
   declarations: [
     AppComponent,
@@ -49,7 +50,20 @@ import { WriteOutJsonInterceptor } from './shared/write-out-json-interceptor';
       useClass: HandleHttpErrorInterceptor,
       multi: true,
     },
-    GlobalErrorHandler, ErrorLoggerService, IncidentService, DatePipe, CommentService],
+    GlobalErrorHandler, ErrorLoggerService, IncidentService, DatePipe, CommentService, MasterDataService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+
+  constructor() {
+    // automapper mappings
+
+    automapper.createMap('IncidentFormModel', 'IncidentForCreation')
+    .forSourceMember('priority', (opts: AutoMapperJs.ISourceMemberConfigurationOptions) => { opts.ignore(); })
+    .forSourceMember('assignedTo', (opts: AutoMapperJs.ISourceMemberConfigurationOptions) => { opts.ignore(); });
+
+    automapper.createMap('IncidentFormModel', 'IncidentWithPriorityAndAssignedToForCreation')
+    .forSourceMember('assignedTo', (opts: AutoMapperJs.ISourceMemberConfigurationOptions) => { opts.ignore(); })
+    .forMember('assignedToProfileId', function (opts) { opts.mapFrom('assignedTo'); });
+  }
+}
