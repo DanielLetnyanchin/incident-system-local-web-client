@@ -5,9 +5,10 @@ import { Observable } from 'rxjs';
 import { Incident } from './incident.model';
 import { BaseService } from '../../shared/base.service';
 import { IncidentWithPriorityAndAssignedTo } from './incident-with-priority-and-assignedto.model';
-import { IncidentWithPriority } from './incident-with-priority.model';
 import { IncidentForCreation } from './incident-for-creation.model';
-import { IncidentWithPriorityAndAssignedToForCreation } from './incident-with-priority-and-assignedto-for-creation.model';
+import { IncidentWithStatusPriorityAndAssignedToForCreation } from './incident-with-status-priority-and-assignedto-for-creation.model';
+import { IncidentWithComments } from './incident-with-comments.model';
+import { IncidentWithPriorityAssignedToAndComments } from './incident-with-priority-assignedto-and-comments.model';
 @Injectable()
 export class IncidentService extends BaseService {
 
@@ -20,18 +21,22 @@ export class IncidentService extends BaseService {
     }
 
     getIncident(incidentId: string): Observable<Incident> {
-        return this.http.get<Incident>(`${this.apiUrl}/incidents/${incidentId}`,
-        { headers: {'Accept': 'application/vnd.conceptual-soft.incident+json'} });
+        return this.http.get<Incident>(`${this.apiUrl}/incidents/${incidentId}`);
     }
 
-    getIncidentWithPriority(incidentId: string): Observable<IncidentWithPriority> {
-      return this.http.get<IncidentWithPriorityAndAssignedTo>(`${this.apiUrl}/incidents/${incidentId}`,
-      { headers: {'Accept': 'application/vnd.conceptual-soft.incidentwithpriorityandassignedto+json'} });
+    getIncidentWithComments(incidentId: string): Observable<IncidentWithComments> {
+      return this.http.get<IncidentWithComments>(`${this.apiUrl}/incidents/${incidentId}`,
+      { headers: {'Accept': 'application/vnd.conceptual-inc.incidentwithcomments+json'} });
     }
 
     getIncidentWithPriorityAndAssignedTo(incidentId: string): Observable<IncidentWithPriorityAndAssignedTo> {
       return this.http.get<IncidentWithPriorityAndAssignedTo>(`${this.apiUrl}/incidents/${incidentId}`,
-      { headers: {'Accept': 'application/vnd.conceptual-soft.incidentwithpriorityandassignedto+json'} });
+      { headers: {'Accept': 'application/vnd.conceptual-inc.incidentwithpriorityandassignedto+json'} });
+    }
+
+    getIncidentWithPriorityAssignedToAndComments(incidentId: string): Observable<IncidentWithPriorityAssignedToAndComments> {
+      return this.http.get<IncidentWithPriorityAssignedToAndComments>(`${this.apiUrl}/incidents/${incidentId}`,
+      { headers: {'Accept': 'application/vnd.conceptual-inc.incidentwithpriorityassignedtoandcomments+json'} });
     }
 
     addIncident(incidentToAdd: IncidentForCreation): Observable<Incident> {
@@ -39,8 +44,8 @@ export class IncidentService extends BaseService {
           { headers: { 'Content-Type': 'application/json' } });
     }
 
-    addIncidentWithPriorityAndAssignedTo(incidentToAdd: IncidentWithPriorityAndAssignedToForCreation): Observable<Incident> {
+    addIncidentWithPriorityAndAssignedTo(incidentToAdd: IncidentWithStatusPriorityAndAssignedToForCreation): Observable<Incident> {
         return this.http.post<Incident>(`${this.apiUrl}/incidents`, incidentToAdd,
-            { headers: { 'Content-Type': 'application/vnd.conceptual-soft.incidentwithpriorityandassignedtoforcreation+json' } });
+            { headers: { 'Content-Type': 'application/vnd.conceptual-inc.incidentwithstatuspriorityandassignedtoforcreation+json' } });
     }
 }

@@ -21,6 +21,7 @@ import { ErrorLoggerService } from './shared/error-logger.service';
 import { HandleHttpErrorInterceptor } from './shared/handle-http-error-interceptor';
 import { WriteOutJsonInterceptor } from './shared/write-out-json-interceptor';
 import { IncidentForCreation } from './incidents/shared/incident-for-creation.model';
+import { EnsureAcceptHeaderInterceptor } from './shared/ensure-accept-header-interceptor';
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,6 +41,11 @@ import { IncidentForCreation } from './incidents/shared/incident-for-creation.mo
     ReactiveFormsModule
   ],
   providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: EnsureAcceptHeaderInterceptor,
+      multi: true
+    },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: WriteOutJsonInterceptor,
@@ -62,7 +68,7 @@ export class AppModule {
     .forSourceMember('priority', (opts: AutoMapperJs.ISourceMemberConfigurationOptions) => { opts.ignore(); })
     .forSourceMember('assignedTo', (opts: AutoMapperJs.ISourceMemberConfigurationOptions) => { opts.ignore(); });
 
-    automapper.createMap('IncidentFormModel', 'IncidentWithPriorityAndAssignedToForCreation')
+    automapper.createMap('IncidentFormModel', 'IncidentWithStatusPriorityAndAssignedToForCreation')
     .forSourceMember('assignedTo', (opts: AutoMapperJs.ISourceMemberConfigurationOptions) => { opts.ignore(); })
     .forMember('assignedToProfileId', function (opts) { opts.mapFrom('assignedTo'); });
   }

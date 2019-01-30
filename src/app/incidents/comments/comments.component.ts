@@ -11,31 +11,10 @@ import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
   styleUrls: ['./comments.component.css']
 })
 
-export class CommentsComponent implements OnInit, OnDestroy {
+export class CommentsComponent implements OnInit{
 
-  private sub: Subscription;
-  private incidentId: string;
-  comments: Comment[];
-
-  constructor(private commentService: CommentService,
-     private route: ActivatedRoute) { }
+  @Input() comments: Comment[];
 
  ngOnInit() {
-      // get route data (incidentId)
-      this.sub = this.route.params.subscribe(
-        params => {
-          this.incidentId = params['incidentId'];
-
-          // load incident
-          this.commentService.getComments(this.incidentId)
-            .subscribe(comments => {
-              this.comments = comments;
-            });
-        }
-      );
-    }
-
-    ngOnDestroy(): void {
-      this.sub.unsubscribe();
-    }
+  }
 }

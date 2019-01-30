@@ -1,5 +1,6 @@
-import { IncidentWithPriority } from './incident-with-priority.model';
+import { Incident } from './incident.model';
 
-export class IncidentWithPriorityAndAssignedTo extends IncidentWithPriority {
-  assignedTo: string;
+export class IncidentWithPriorityAndAssignedTo extends Incident {
+    priority: string;
+    assignedTo: string;
 }

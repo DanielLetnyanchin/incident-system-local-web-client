@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { Manager } from 'src/app/shared/manager.model';
 import { MasterDataService } from 'src/app/shared/master-data.service';
 import { Priority } from 'src/app/shared/priority.model';
+import { Status } from 'src/app/shared/status.model';
 
 @Component({
   selector: 'incident-system-incident-add',
@@ -15,10 +16,11 @@ import { Priority } from 'src/app/shared/priority.model';
 export class IncidentAddComponent implements OnInit {
 
   public incidentForm: FormGroup;
+  statuses: Status[];
   priorities: Priority[];
   managers: Manager[];
   // tslint:disable-next-line:no-inferrable-types
-  private isAdmin: boolean = false;
+  private isAdmin: boolean = true;
 
   constructor(private masterDataService: MasterDataService,
     private incidentService: IncidentService,
@@ -31,9 +33,18 @@ export class IncidentAddComponent implements OnInit {
     this.incidentForm = this.formBuilder.group({
       title: [''],
       description: [''],
+      status: [''],
       priority: [''],
       assignedTo: ['']
     });
+
+    if (this.isAdmin === true) {
+      // get statuses from master data service
+      this.masterDataService.getStatuses()
+      .subscribe(statuses => {
+        this.statuses = statuses;
+      });
+     }
 
     if (this.isAdmin === true) {
      // get priorities from master data service
@@ -55,11 +66,11 @@ export class IncidentAddComponent implements OnInit {
   addIncident(): void {
     if (this.incidentForm.dirty) {
       if (this.isAdmin === true) {
-        //  create IncidentWithPriorityAndAssignedToForCreation from form model
+        //  create IncidentWithStatusPriorityAndAssignedToForCreation from form model
         // tslint:disable-next-line:prefer-const
         let incident = automapper.map(
           'IncidentFormModel',
-           'IncidentWithPriorityAndAssignedToForCreation',
+           'IncidentWithStatusPriorityAndAssignedToForCreation',
            this.incidentForm.value);
 
         this.incidentService.addIncidentWithPriorityAndAssignedTo(incident)

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Incident } from '../shared/incident.model';
+import { IncidentWithPriorityAndAssignedTo } from '../shared/incident-with-priority-and-assignedto.model';
 import { IncidentService } from '../shared/incident.service';
 import { ActivatedRoute } from '@angular/router';
 import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
@@ -16,7 +17,7 @@ export class IncidentDetailComponent implements OnInit, OnDestroy {
   private incidentId: string;
   private sub: Subscription;
   // tslint:disable-next-line:no-inferrable-types
-  private isAdmin: boolean = false;
+  private isAdmin: boolean = true;
 
   constructor(private incidentService: IncidentService,
     private route: ActivatedRoute) {
@@ -30,13 +31,13 @@ export class IncidentDetailComponent implements OnInit, OnDestroy {
 
         if (this.isAdmin === true) {
         // get incident with priority and assignedto fields
-        this.incidentService.getIncidentWithPriorityAndAssignedTo(this.incidentId)
+        this.incidentService.getIncidentWithPriorityAssignedToAndComments(this.incidentId)
         .subscribe(incident => {
           this.incident = incident;
         });
       } else {
         // get incident
-        this.incidentService.getIncident(this.incidentId)
+        this.incidentService.getIncidentWithComments(this.incidentId)
         .subscribe(incident => {
           this.incident = incident;
         });

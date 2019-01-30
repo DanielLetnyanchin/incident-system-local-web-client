@@ -1,8 +1,9 @@
 import { IncidentForCreation } from './incident-for-creation.model';
 
 
-export class IncidentWithPriorityAndAssignedToForCreation extends IncidentForCreation {
+export class IncidentWithStatusPriorityAndAssignedToForCreation extends IncidentForCreation {
     // createdBy: string;
+    status: string;
     priority: string;
     assignedToProfileId: string;
 }
