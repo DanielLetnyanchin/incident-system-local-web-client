@@ -20,7 +20,6 @@ import { GlobalErrorHandler } from './shared/global-error-handler';
 import { ErrorLoggerService } from './shared/error-logger.service';
 import { HandleHttpErrorInterceptor } from './shared/handle-http-error-interceptor';
 import { WriteOutJsonInterceptor } from './shared/write-out-json-interceptor';
-import { IncidentForCreation } from './incidents/shared/incident-for-creation.model';
 import { EnsureAcceptHeaderInterceptor } from './shared/ensure-accept-header-interceptor';
 @NgModule({
   declarations: [
@@ -71,5 +70,9 @@ export class AppModule {
     automapper.createMap('IncidentFormModel', 'IncidentWithStatusPriorityAndAssignedToForCreation')
     .forSourceMember('assignedTo', (opts: AutoMapperJs.ISourceMemberConfigurationOptions) => { opts.ignore(); })
     .forMember('assignedToProfileId', function (opts) { opts.mapFrom('assignedTo'); });
+
+    automapper.createMap('CommentFormModel', 'CommentForCreation')
+    // .forSourceMember('message', (opts: AutoMapperJs.ISourceMemberConfigurationOptions) => { opts.ignore(); })
+    .forMember('message', function (opts) { opts.mapFrom('message'); });
   }
 }

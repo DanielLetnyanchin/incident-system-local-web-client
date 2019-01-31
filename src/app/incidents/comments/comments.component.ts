@@ -11,7 +11,7 @@ import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
   styleUrls: ['./comments.component.css']
 })
 
-export class CommentsComponent implements OnInit{
+export class CommentsComponent implements OnInit {
 
   @Input() comments: Comment[];
 

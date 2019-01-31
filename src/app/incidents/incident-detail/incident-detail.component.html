@@ -39,15 +39,11 @@
 
 <div class="panel panel-primary" *ngIf='incident && incident.comments && incident.comments.length'>
 
-    <div class="row" style="margin-top:10px;" >
-        <button class="btn btn-primary"
-        [routerLink]="['comment-add']"
-        style="width:150px; margin-left:50px">Add comment</button>
-    </div>
-
   <div class="panel-body">
-    <incident-system-comments
-    [comments]="incident.comments"
-    ></incident-system-comments>
+      <incident-system-comment-add>
+      </incident-system-comment-add>
   </div>
+  <incident-system-comments
+      [comments]="incident.comments"
+      ></incident-system-comments>
 </div>
