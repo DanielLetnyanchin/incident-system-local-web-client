@@ -3,22 +3,55 @@
     Edit incident  {{incident.incidentId}}
   </div>
 
-  <div class="panel-body">
-    <form class="form-horizontal" novalidate (ngSubmit)="saveIncident()" [formGroup]="incidentForm">
-      <fieldset>
-        <div class="form-group">
-          <label class="col-md-2 control-label" for="titleId">Title</label>
-          <div class="col-md-8">
-            <input class="form-control" id="titleId" type="text" placeholder="Status" formControlName="status" />
+  <div class="panel-body" *ngIf='(isAdmin === true)'>
+      <form class="form-horizontal" novalidate (ngSubmit)="saveIncident()" [formGroup]="incidentForm">
+        <fieldset>
+          <div class="form-group">
+            <label class="col-md-2 control-label" for="titleId">Title</label>
+            <div class="col-md-8">
+              <input class="form-control" id="titleId" type="text" placeholder="Title" formControlName="title" />
+            </div>
           </div>
-        </div>
 
-        <div class="form-group">
-          <label class="col-md-2 control-label" for="descriptionId">Description</label>
-          <div class="col-md-8">
-            <textarea class="form-control" id="descriptionId" placeholder="Description" rows=5 formControlName="description"></textarea>
+          <div class="form-group">
+            <label class="col-md-2 control-label" for="descriptionId">Description</label>
+            <div class="col-md-8">
+              <textarea class="form-control" id="descriptionId" placeholder="Description" rows=5 formControlName="description"></textarea>
+            </div>
           </div>
-        </div>
+
+          <div class="form-group">
+            <label class="col-md-2 control-label" for="statusId">Status</label>
+            <div class="col-md-8">
+              <select class="form-control" formControlName="status" id="statusId">
+                <option *ngFor="let status of statuses" [ngValue]="status.statusValue">
+                  {{status.statusValue}}
+                </option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-md-2 control-label" for="priorityId">Priority</label>
+            <div class="col-md-8">
+              <select class="form-control" formControlName="priority" id="priorityId">
+                <option *ngFor="let priority of priorities" [ngValue]="priority.priorityValue">
+                  {{priority.priorityValue}}
+                </option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-md-2 control-label" for="assignedToId">Assigned to</label>
+            <div class="col-md-8">
+              <select class="form-control" formControlName="assignedTo" id="assignedToId">
+                <option *ngFor="let manager of managers" [ngValue]="manager.profileId">
+                  {{manager.fullName}}
+                </option>
+              </select>
+            </div>
+          </div>
 
         <div class="form-group">
           <div class="col-md-4 col-md-offset-2">

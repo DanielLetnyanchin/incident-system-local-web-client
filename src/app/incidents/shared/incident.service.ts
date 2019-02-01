@@ -9,6 +9,7 @@ import { IncidentForCreation } from './incident-for-creation.model';
 import { IncidentWithStatusPriorityAndAssignedToForCreation } from './incident-with-status-priority-and-assignedto-for-creation.model';
 import { IncidentWithComments } from './incident-with-comments.model';
 import { IncidentWithPriorityAssignedToAndComments } from './incident-with-priority-assignedto-and-comments.model';
+import { Operation } from 'fast-json-patch';
 @Injectable()
 export class IncidentService extends BaseService {
 
@@ -48,4 +49,9 @@ export class IncidentService extends BaseService {
         return this.http.post<Incident>(`${this.apiUrl}/incidents`, incidentToAdd,
             { headers: { 'Content-Type': 'application/vnd.conceptual-inc.incidentwithstatuspriorityandassignedtoforcreation+json' } });
     }
+
+    partiallyUpdateIncident(incidentId: string, patchDocument: Operation[]): Observable<any> {
+      return this.http.patch(`${this.apiUrl}/incidents/${incidentId}`, patchDocument,
+      { headers: { 'Content-Type': 'application/json-patch+json' } });
+      }
 }

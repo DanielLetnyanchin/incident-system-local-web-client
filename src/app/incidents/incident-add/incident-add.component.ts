@@ -20,7 +20,7 @@ export class IncidentAddComponent implements OnInit {
   priorities: Priority[];
   managers: Manager[];
   // tslint:disable-next-line:no-inferrable-types
-  private isAdmin: boolean = false;
+  private isAdmin: boolean = true;
 
   constructor(private masterDataService: MasterDataService,
     private incidentService: IncidentService,

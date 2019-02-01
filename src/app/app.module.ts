@@ -72,7 +72,8 @@ export class AppModule {
     .forMember('assignedToProfileId', function (opts) { opts.mapFrom('assignedTo'); });
 
     automapper.createMap('CommentFormModel', 'CommentForCreation')
-    // .forSourceMember('message', (opts: AutoMapperJs.ISourceMemberConfigurationOptions) => { opts.ignore(); })
     .forMember('message', function (opts) { opts.mapFrom('message'); });
+
+    automapper.createMap('IncidentFormModel', 'IncidentForUpdate');
   }
 }

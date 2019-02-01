@@ -18,7 +18,7 @@ export class IncidentDetailComponent implements OnInit, OnDestroy {
   private incidentId: string;
   private sub: Subscription;
   // tslint:disable-next-line:no-inferrable-types
-  private isAdmin: boolean = false;
+  private isAdmin: boolean = true;
 
   constructor(private incidentService: IncidentService,
     private route: ActivatedRoute) {
