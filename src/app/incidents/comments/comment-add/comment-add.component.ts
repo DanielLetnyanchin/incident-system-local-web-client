@@ -44,7 +44,7 @@ export class CommentAddComponent implements OnInit {
     this.commentService.addComment(this.incidentId, comment)
       .subscribe(
         () => {
-          this.router.navigateByUrl('/incidents');
+           this.router.navigateByUrl('/incidents/' + this.incidentId);
         });
   }
 }
@@ -53,6 +53,4 @@ export class CommentAddComponent implements OnInit {
 ngOnDestroy(): void {
   this.sub.unsubscribe();
 }
-
-
 }

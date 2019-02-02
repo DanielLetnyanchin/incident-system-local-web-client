@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Incident } from '../shared/incident.model';
 import { IncidentWithComments } from '../shared/incident-with-comments.model';
-import { IncidentWithPriorityAndAssignedTo } from '../shared/incident-with-priority-and-assignedto.model';
+// tslint:disable-next-line:max-line-length
+import { IncidentWithPriorityAssignedToCreatedByAndComments } from '../shared/incident-with-priority-assignedto-createdby-and-comments.model';
 import { IncidentService } from '../shared/incident.service';
 import { ActivatedRoute } from '@angular/router';
 import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
@@ -32,7 +32,7 @@ export class IncidentDetailComponent implements OnInit, OnDestroy {
 
         if (this.isAdmin === true) {
         // get incident with priority and assignedto fields
-        this.incidentService.getIncidentWithPriorityAssignedToAndComments(this.incidentId)
+        this.incidentService.getIncidentWithPriorityAssignedToCreatedByAndComments(this.incidentId)
         .subscribe(incident => {
           this.incident = incident;
         });

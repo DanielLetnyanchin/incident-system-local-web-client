@@ -1,4 +1,8 @@
-import { IncidentWithStatusPriorityAndAssignedToForCreation } from './incident-with-status-priority-and-assignedto-for-creation.model';
 
-export class IncidentForUpdate extends IncidentWithStatusPriorityAndAssignedToForCreation {
+export class IncidentForUpdate {
+  title: string;
+  description: string;
+  status: string;
+  priority: string;
+  assignedToProfileId: string;
 }

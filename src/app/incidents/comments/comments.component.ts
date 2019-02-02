@@ -12,9 +12,20 @@ import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
 })
 
 export class CommentsComponent implements OnInit {
+  constructor(private route: ActivatedRoute) { }
+
+  // tslint:disable-next-line:no-inferrable-types
+  private isAdmin: boolean = true;
+  private incidentId: string;
+  private sub: Subscription;
 
   @Input() comments: Comment[];
 
  ngOnInit() {
-  }
+  this.sub = this.route.params.subscribe(
+    params => {
+      this.incidentId = params['incidentId'];
+    }
+  );
+}
 }

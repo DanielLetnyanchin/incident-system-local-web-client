@@ -73,7 +73,7 @@ export class IncidentAddComponent implements OnInit {
            'IncidentWithStatusPriorityAndAssignedToForCreation',
            this.incidentForm.value);
 
-        this.incidentService.addIncidentWithPriorityAndAssignedTo(incident)
+        this.incidentService.addIncidentWithStatusPriorityAndAssignedTo(incident)
         .subscribe(
           () => {
             this.router.navigateByUrl('/incidents');
