@@ -11,7 +11,6 @@ import { Status } from 'src/app/shared/status.model';
 import { Priority } from 'src/app/shared/priority.model';
 import { Manager } from 'src/app/shared/manager.model';
 import { MasterDataService } from 'src/app/shared/master-data.service';
-import { IncidentWithPriorityAssignedToAndCreatedBy } from '../shared/incident-with-priority-assignedto-and-createdby.model';
 
 @Component({
   selector: 'incident-system-incident-update',
@@ -24,7 +23,7 @@ export class IncidentUpdateComponent implements OnInit, OnDestroy {
   statuses: Status[];
   priorities: Priority[];
   managers: Manager[];
-  private incident: IncidentWithPriorityAssignedToAndCreatedBy;
+  private incident: Incident;
   private incidentId: string;
   private sub: Subscription;
   private originalIncidentForUpdate: IncidentForUpdate;
@@ -53,7 +52,7 @@ export class IncidentUpdateComponent implements OnInit, OnDestroy {
           this.incidentId = params['incidentId'];
 
           // load incident
-          this.incidentService.getIncidentWithPriorityAssignedToAndCreatedBy(this.incidentId)
+          this.incidentService.getIncident(this.incidentId)
             .subscribe(incident => {
               this.incident = incident;
               this.updateIncidentForm();
@@ -94,10 +93,7 @@ export class IncidentUpdateComponent implements OnInit, OnDestroy {
   private updateIncidentForm(): void {
     this.incidentForm.patchValue({
       title: this.incident.title,
-      description: this.incident.description,
-      status: this.incident.status,
-      priority: this.incident.priority,
-      assignedTo: this.incident.assignedTo
+      description: this.incident.description
     });
   }
 
@@ -117,7 +113,7 @@ export class IncidentUpdateComponent implements OnInit, OnDestroy {
       this.incidentService.partiallyUpdateIncident(this.incidentId, patchDocument)
         .subscribe(
           () => {
-            this.router.navigateByUrl('/incidents/' + this.incidentId);
+            this.router.navigateByUrl('/incidents');
           });
     }
 }

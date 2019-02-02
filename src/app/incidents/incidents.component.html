@@ -14,9 +14,7 @@
           <tr>
             <th>Title</th>
             <th>Status</th>
-            <th *ngIf='(isAdmin === true)'>Priority</th>
-            <th *ngIf='(isAdmin === true)'>Assigned to</th>
-            <th *ngIf='(isAdmin === true)'>Created by</th>
+            <th>Description</th>
             <th>Date created</th>
             <th>Date modified</th>
           </tr>
@@ -25,14 +23,16 @@
           <tr *ngFor='let incident of incidents'>
             <td>{{incident.title}}</td>
             <td>{{incident.status}}</td>
-            <td *ngIf='incident.priority'>{{incident.priority}}</td>
-            <td *ngIf='incident.assignedTo'>{{incident.assignedTo}}</td>
-            <td *ngIf='incident.createdBy'>{{incident.createdBy}}</td>
+            <td>
+              <a [routerLink]="['/incidents', incident.incidentId]">
+                {{incident.description}}
+              </a>
+            </td>
             <td>{{incident.dateCreated|date:'dd/MM/yyyy'}}</td>
             <td>{{incident.dateModified|date:'dd/MM/yyyy'}}</td>
             <td>
-              <a class="btn btn-primary" [routerLink]="['/incidents', incident.incidentId]">
-                Details
+              <a class="btn btn-primary" [routerLink]="['/incident-update', incident.incidentId]">
+                Edit
               </a>
             </td>
           </tr>

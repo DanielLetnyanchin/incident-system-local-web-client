@@ -12,7 +12,7 @@ import {
   IncidentsComponent, IncidentAddComponent, IncidentDetailComponent,
   IncidentUpdateComponent
  } from './incidents';
- import { CommentsComponent, CommentAddComponent, CommentUpdateComponent } from './incidents/comments';
+ import { CommentsComponent, CommentAddComponent } from './incidents/comments';
 import { MasterDataService } from './shared/master-data.service';
  import { IncidentService } from './incidents/shared/incident.service';
  import { CommentService } from './incidents/comments/shared/comment.service';
@@ -31,7 +31,6 @@ import { EnsureAcceptHeaderInterceptor } from './shared/ensure-accept-header-int
     IncidentUpdateComponent,
     CommentsComponent,
     CommentAddComponent,
-    CommentUpdateComponent
   ],
   imports: [
     BrowserModule,
@@ -75,11 +74,6 @@ export class AppModule {
     automapper.createMap('CommentFormModel', 'CommentForCreation')
     .forMember('message', function (opts) { opts.mapFrom('message'); });
 
-    automapper.createMap('IncidentFormModel', 'IncidentForUpdate')
-    .forSourceMember('assignedTo', (opts: AutoMapperJs.ISourceMemberConfigurationOptions) => { opts.ignore(); })
-    .forMember('assignedToProfileId', function (opts) { opts.mapFrom('assignedTo'); });
-
-    automapper.createMap('CommentFormModel', 'CommentForUpdate')
-    .forMember('message', function (opts) { opts.mapFrom('message'); });
+    automapper.createMap('IncidentFormModel', 'IncidentForUpdate');
   }
 }

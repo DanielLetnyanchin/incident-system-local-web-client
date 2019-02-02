@@ -1,13 +1,9 @@
 <div class="panel panel-primary" *ngIf='incident'>
   <div class="panel-heading">
-      Details for "{{incident.title}}" incident
+      Details for {{incident.title}}
   </div>
 
   <div class="panel-body">
-              <div class="row">
-                  <div class="col-md-2">Title:</div>
-                  <div class="col-md-10">{{incident.title}}</div>
-              </div>
               <div class="row">
                   <div class="col-md-2">Status:</div>
                   <div class="col-md-10">{{incident.status}}</div>
@@ -16,18 +12,6 @@
                   <div class="col-md-2">Description:</div>
                   <div class="col-md-10">{{incident.description}}</div>
               </div>
-              <div class="row" *ngIf='incident.priority' style="margin-top:10px;">
-                  <div class="col-md-2">Priority:</div>
-                  <div class="col-md-10">{{incident.priority}}</div>
-              </div>
-              <div class="row" *ngIf='incident.assignedTo' style="margin-top:10px;">
-                <div class="col-md-2">Assigned to:</div>
-                <div class="col-md-10">{{incident.assignedTo}}</div>
-              </div>
-              <div class="row" *ngIf='incident.createdBy' style="margin-top:10px;">
-                  <div class="col-md-2">Created by:</div>
-                  <div class="col-md-10">{{incident.createdBy}}</div>
-                </div>
               <div class="row" style="margin-top:10px;">
                   <div class="col-md-2">Date created:</div>
                   <div class="col-md-10">{{incident.dateCreated|date:'MM/dd/yyyy'}}</div>
@@ -36,25 +20,30 @@
                   <div class="col-md-2">Date modified:</div>
                   <div class="col-md-10">{{incident.dateModified|date:'MM/dd/yyyy'}}</div>
               </div>
+              <div class="row" *ngIf='incident.priority' style="margin-top:10px;">
+                  <div class="col-md-2">Priority:</div>
+                  <div class="col-md-10">{{incident.priority}}</div>
+              </div>
+              <div class="row" *ngIf='incident.assignedTo' style="margin-top:10px;">
+                <div class="col-md-2">Assigned to:</div>
+                <div class="col-md-10">{{incident.assignedTo}}</div>
+            </div>
   </div>
+
   <div class="panel-footer">
-      <a *ngIf='(isAdmin === true)' class="btn btn-primary" [routerLink]="['/incident-update', incident.incidentId]">
-        Update
+      <a class="btn btn-default" [routerLink]="['/incidents']">
+          Back
       </a>
   </div>
 </div>
 
-<div class="panel panel-primary" >
+<div class="panel panel-primary" *ngIf='incident && incident.comments && incident.comments.length'>
 
   <div class="panel-body">
       <incident-system-comment-add>
       </incident-system-comment-add>
-
-    <div *ngIf='incident && incident.comments && incident.comments.length'>
-    <incident-system-comments
+  </div>
+  <incident-system-comments
       [comments]="incident.comments"
       ></incident-system-comments>
-    </div>
-
-  </div>
 </div>
