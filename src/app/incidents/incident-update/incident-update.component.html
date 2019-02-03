@@ -1,9 +1,9 @@
-<div class="panel panel-primary">
+<div class="panel panel-primary" *ngIf='(isManager === true)'>
   <div class="panel-heading" *ngIf='incident'>
-    Edit incident  {{incident.incidentId}}
+    Update incident  "{{incident.title}}"
   </div>
 
-  <div class="panel-body" *ngIf='(isAdmin === true)'>
+  <div class="panel-body">
       <form class="form-horizontal" novalidate (ngSubmit)="saveIncident()" [formGroup]="incidentForm">
         <fieldset>
           <div class="form-group">
@@ -43,15 +43,14 @@
           </div>
 
           <div class="form-group">
-            <label class="col-md-2 control-label" for="assignedToId">Assigned to</label>
-            <div class="col-md-8">
-              <select class="form-control" formControlName="assignedTo" id="assignedToId">
-                <option *ngFor="let manager of managers" [ngValue]="manager.profileId">
-                  {{manager.fullName}}
-                </option>
-              </select>
+              <label class="col-md-2 control-label" for="assignedToId">Assigned to</label>
+              <div class="col-md-8">
+                <select class="form-control" id="assignedToId" type="text" placeholder="incident.assignedTo" formControlName="assignedTo" >
+                  <option [ngValue]="incident.assignedTo" disabled selected hidden>{{incident.assignedTo}}</option>
+                  <option *ngFor="let manager of managers" [ngValue]="manager.profileId"> {{manager.fullName}} </option>
+                </select>
+              </div>
             </div>
-          </div>
 
         <div class="form-group">
           <div class="col-md-4 col-md-offset-2">

@@ -7,6 +7,7 @@ import { CommentForUpdate } from '../shared/comment-for-update.model';
 import { CommentService } from '../shared/comment.service';
 import { CommentAbstractBase } from '../shared/comment-abstract-base.model';
 import { Comment } from '../shared/comment.model';
+import { OpenIdConnectService } from 'src/app/shared/open-id-connect.service';
 
 @Component({
   selector: 'incident-system-comment-update',
@@ -22,19 +23,21 @@ export class CommentUpdateComponent implements OnInit, OnDestroy {
   private comment: Comment;
   private originalCommentForUpdate: CommentForUpdate;
   // tslint:disable-next-line:no-inferrable-types
-  private isAdmin: boolean = true;
+  private isManager: boolean =
+    (this.openIdConnectService.user.profile.role === 'Manager');
 
   constructor(private commentService: CommentService,
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
-    private router: Router) { }
+    private router: Router,
+    private openIdConnectService: OpenIdConnectService) { }
 
   ngOnInit() {
     this.commentForm = this.formBuilder.group({
       message: ['']
     });
 
-    if (this.isAdmin === true) {
+    if (this.isManager === true) {
       this.sub = this.route.params.subscribe(
         params => {
           this.incidentId = params['incidentId'],

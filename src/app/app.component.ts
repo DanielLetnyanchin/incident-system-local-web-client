@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import 'automapper-ts';
+import { OpenIdConnectService } from './shared/open-id-connect.service';
 @Component({
   selector: 'incident-system-root',
   templateUrl: './app.component.html',
@@ -7,4 +8,7 @@ import 'automapper-ts';
 })
 export class AppComponent {
   title = 'client-app';
+
+  constructor(private openIdConnectService: OpenIdConnectService) {
+  }
 }

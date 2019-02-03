@@ -38,7 +38,7 @@
               </div>
   </div>
   <div class="panel-footer">
-      <a *ngIf='(isAdmin === true)' class="btn btn-primary" [routerLink]="['/incident-update', incident.incidentId]">
+      <a *ngIf='(isManager === true)' class="btn btn-primary" [routerLink]="['/incident-update', incident.incidentId]">
         Update
       </a>
   </div>

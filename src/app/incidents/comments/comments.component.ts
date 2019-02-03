@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { CommentService } from './shared/comment.service';
 import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
+import { OpenIdConnectService } from 'src/app/shared/open-id-connect.service';
 
 @Component({
   selector: 'incident-system-comments',
@@ -12,10 +13,12 @@ import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
 })
 
 export class CommentsComponent implements OnInit {
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute,
+    private openIdConnectService: OpenIdConnectService) { }
 
   // tslint:disable-next-line:no-inferrable-types
-  private isAdmin: boolean = true;
+  private isManager: boolean =
+    (this.openIdConnectService.user.profile.role === 'Manager');
   private incidentId: string;
   private sub: Subscription;
 

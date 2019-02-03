@@ -12,6 +12,7 @@ import { Priority } from 'src/app/shared/priority.model';
 import { Manager } from 'src/app/shared/manager.model';
 import { MasterDataService } from 'src/app/shared/master-data.service';
 import { IncidentWithPriorityAssignedToAndCreatedBy } from '../shared/incident-with-priority-assignedto-and-createdby.model';
+import { OpenIdConnectService } from 'src/app/shared/open-id-connect.service';
 
 @Component({
   selector: 'incident-system-incident-update',
@@ -29,13 +30,15 @@ export class IncidentUpdateComponent implements OnInit, OnDestroy {
   private sub: Subscription;
   private originalIncidentForUpdate: IncidentForUpdate;
   // tslint:disable-next-line:no-inferrable-types
-  private isAdmin: boolean = true;
+  private isManager: boolean =
+    (this.openIdConnectService.user.profile.role === 'Manager');
 
   constructor(private masterDataService: MasterDataService,
     private incidentService: IncidentService,
     private route: ActivatedRoute,
     private router: Router,
-    private formBuilder: FormBuilder) { }
+    private formBuilder: FormBuilder,
+    private openIdConnectService: OpenIdConnectService) { }
 
   ngOnInit() {
     // define the incidentForm (with empty default values)
@@ -46,7 +49,7 @@ export class IncidentUpdateComponent implements OnInit, OnDestroy {
       priority: [''],
       assignedTo: ['']
     });
-    if (this.isAdmin === true) {
+    if (this.isManager === true) {
       // get route data (incidentId)
       this.sub = this.route.params.subscribe(
         params => {

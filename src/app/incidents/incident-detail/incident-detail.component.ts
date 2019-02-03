@@ -6,6 +6,7 @@ import { IncidentService } from '../shared/incident.service';
 import { ActivatedRoute } from '@angular/router';
 import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
 import { Subscription } from 'rxjs/';
+import { OpenIdConnectService } from 'src/app/shared/open-id-connect.service';
 
 @Component({
   selector: 'incident-system-incident-detail',
@@ -18,10 +19,12 @@ export class IncidentDetailComponent implements OnInit, OnDestroy {
   private incidentId: string;
   private sub: Subscription;
   // tslint:disable-next-line:no-inferrable-types
-  private isAdmin: boolean = true;
+  private isManager: boolean =
+    (this.openIdConnectService.user.profile.role === 'Manager');
 
   constructor(private incidentService: IncidentService,
-    private route: ActivatedRoute) {
+    private route: ActivatedRoute,
+    private openIdConnectService: OpenIdConnectService) {
   }
 
   ngOnInit() {
@@ -30,7 +33,7 @@ export class IncidentDetailComponent implements OnInit, OnDestroy {
       params => {
         this.incidentId = params['incidentId'];
 
-        if (this.isAdmin === true) {
+        if (this.isManager === true) {
         // get incident with priority and assignedto fields
         this.incidentService.getIncidentWithPriorityAssignedToCreatedByAndComments(this.incidentId)
         .subscribe(incident => {

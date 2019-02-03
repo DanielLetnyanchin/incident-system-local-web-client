@@ -3,6 +3,7 @@ import { IncidentService } from './shared/incident.service';
 // tslint:disable-next-line:max-line-length
 import { IncidentGeneralInfoWithPriorityAssignedToAndCreatedBy } from './shared/incident-general-info-with-priority-assignedto-and-createdby.model';
 import { IncidentGeneralInfo } from './shared/incident-general-info.model';
+import { OpenIdConnectService } from '../shared/open-id-connect.service';
 
 @Component({
   selector: 'incident-system-incidents',
@@ -15,13 +16,15 @@ export class IncidentsComponent implements OnInit {
   incidents: any[] = [];
 
   // tslint:disable-next-line:no-inferrable-types
-  private isAdmin: boolean = true;
+  private isManager: boolean =
+    (this.openIdConnectService.user.profile.role === 'Manager');
 
-  constructor(private incidentService: IncidentService) {
+  constructor(private incidentService: IncidentService,
+    private openIdConnectService: OpenIdConnectService) {
       }
 
       ngOnInit() {
-        if (this.isAdmin === true) {
+        if (this.isManager === true) {
           this.incidentService.getIncidentsGeneralInfoWithPriorityAssignedToAndCreatedBy()
           .subscribe(incidents => {
               this.incidents = incidents;

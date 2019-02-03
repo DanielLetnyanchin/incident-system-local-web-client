@@ -7,6 +7,7 @@ import { Manager } from 'src/app/shared/manager.model';
 import { MasterDataService } from 'src/app/shared/master-data.service';
 import { Priority } from 'src/app/shared/priority.model';
 import { Status } from 'src/app/shared/status.model';
+import { OpenIdConnectService } from 'src/app/shared/open-id-connect.service';
 
 @Component({
   selector: 'incident-system-incident-add',
@@ -20,12 +21,14 @@ export class IncidentAddComponent implements OnInit {
   priorities: Priority[];
   managers: Manager[];
   // tslint:disable-next-line:no-inferrable-types
-  private isAdmin: boolean = true;
+  private isManager: boolean =
+    (this.openIdConnectService.user.profile.role === 'Manager');
 
   constructor(private masterDataService: MasterDataService,
     private incidentService: IncidentService,
     private formBuilder: FormBuilder,
-    private router: Router) { }
+    private router: Router,
+    private openIdConnectService: OpenIdConnectService) { }
 
   ngOnInit() {
 
@@ -38,7 +41,7 @@ export class IncidentAddComponent implements OnInit {
       assignedTo: ['']
     });
 
-    if (this.isAdmin === true) {
+    if (this.isManager === true) {
       // get statuses from master data service
       this.masterDataService.getStatuses()
       .subscribe(statuses => {
@@ -46,7 +49,7 @@ export class IncidentAddComponent implements OnInit {
       });
      }
 
-    if (this.isAdmin === true) {
+    if (this.isManager === true) {
      // get priorities from master data service
      this.masterDataService.getPriorities()
      .subscribe(priorities => {
@@ -54,7 +57,7 @@ export class IncidentAddComponent implements OnInit {
      });
     }
 
-    if (this.isAdmin === true) {
+    if (this.isManager === true) {
       // get managers from master data service
       this.masterDataService.getManagers()
         .subscribe(managers => {
@@ -65,7 +68,7 @@ export class IncidentAddComponent implements OnInit {
 
   addIncident(): void {
     if (this.incidentForm.dirty) {
-      if (this.isAdmin === true) {
+      if (this.isManager === true) {
         //  create IncidentWithStatusPriorityAndAssignedToForCreation from form model
         // tslint:disable-next-line:prefer-const
         let incident = automapper.map(

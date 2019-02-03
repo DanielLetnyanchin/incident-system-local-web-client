@@ -8,12 +8,12 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor='let comment of comments'>
+              <tr  *ngFor='let comment of comments'>
                 <td>{{comment.author}}</td>
                 <td>{{comment.message}}</td>
                 <td>{{comment.dateCreated|date:'dd/MM/yyyy'}}</td>
                 <td>
-                  <a *ngIf='(isAdmin === true)' class="btn btn-primary" [routerLink]="['/incidents', incidentId,'comment-update', comment.commentId]">
+                  <a *ngIf='(isManager === true)' class="btn btn-primary" [routerLink]="['/incidents', incidentId,'comment-update', comment.commentId]">
                     Edit
                   </a>
                 </td>
