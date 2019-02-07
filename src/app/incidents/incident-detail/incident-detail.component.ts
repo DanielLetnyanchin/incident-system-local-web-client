@@ -15,7 +15,7 @@ import { OpenIdConnectService } from 'src/app/shared/open-id-connect.service';
 })
 export class IncidentDetailComponent implements OnInit, OnDestroy {
 
-  private incident: any;
+  public incident: any;
   private incidentId: string;
   private sub: Subscription;
   // tslint:disable-next-line:no-inferrable-types

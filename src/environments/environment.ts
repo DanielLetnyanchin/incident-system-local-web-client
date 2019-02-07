@@ -4,9 +4,9 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://localhost:44382/api',
+  apiUrl: 'https://incidentsystemapi.azurewebsites.net/api',
   openIdConnectSettings: {
-    authority: 'https://localhost:44398/',
+    authority: 'https://incidentsystemidp.azurewebsites.net/',
     client_id: 'incidentmanagementclient',
     redirect_uri: 'https://localhost:4200/signin-oidc',
     scope: 'openid profile roles incidentmanagementapi',

@@ -30,7 +30,7 @@ export class IncidentUpdateComponent implements OnInit, OnDestroy {
   private sub: Subscription;
   private originalIncidentForUpdate: IncidentForUpdate;
   // tslint:disable-next-line:no-inferrable-types
-  private isManager: boolean =
+  public isManager: boolean =
     (this.openIdConnectService.user.profile.role === 'Manager');
 
   constructor(private masterDataService: MasterDataService,

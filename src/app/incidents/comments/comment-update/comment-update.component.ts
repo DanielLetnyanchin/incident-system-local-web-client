@@ -23,7 +23,7 @@ export class CommentUpdateComponent implements OnInit, OnDestroy {
   private comment: Comment;
   private originalCommentForUpdate: CommentForUpdate;
   // tslint:disable-next-line:no-inferrable-types
-  private isManager: boolean =
+  public isManager: boolean =
     (this.openIdConnectService.user.profile.role === 'Manager');
 
   constructor(private commentService: CommentService,

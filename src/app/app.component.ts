@@ -9,6 +9,6 @@ import { OpenIdConnectService } from './shared/open-id-connect.service';
 export class AppComponent {
   title = 'client-app';
 
-  constructor(private openIdConnectService: OpenIdConnectService) {
+  constructor(public openIdConnectService: OpenIdConnectService) {
   }
 }

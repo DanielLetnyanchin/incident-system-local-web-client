@@ -21,7 +21,7 @@ export class IncidentAddComponent implements OnInit {
   priorities: Priority[];
   managers: Manager[];
   // tslint:disable-next-line:no-inferrable-types
-  private isManager: boolean =
+  public isManager: boolean =
     (this.openIdConnectService.user.profile.role === 'Manager');
 
   constructor(private masterDataService: MasterDataService,
